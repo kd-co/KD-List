@@ -4,10 +4,15 @@
 	<title>KDCo - The KD List</title>
 	<link rel="stylesheet" type="text/css" href="css/grid12.css">
 	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="css/animate.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<meta name="description" content="Kerala Designers Collaborative (KDCo) is a collective of Designers, Illustrators, Graphic Artists and other creative professionals from Kerala to facilitate an even platform for discussions, debates and creative collaborations concerning the design discourse in Kerala.">
+  	<meta name="keywords" content="Malayalam, Design, Typography, Calligraphy, Letters">
+  	<meta name="author" content="Kerala Designers Collaborative">
+  	<meta name=viewport content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<div class="nav-section">
+	<div class="nav-section animated fadeIn">
 		<nav class="nav">
 			<a class="logo-container" href="http://kdco.info/">
 	          	<svg version="1.1" id="kdco-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="324px" height="218px" viewBox="0 0 324 218" enable-background="new 0 0 324 218" xml:space="preserve" class="main-logo">
@@ -213,7 +218,7 @@
 
 			},
 			{ 
-				name: 'VP', 
+				name: 'Creative Director', 
 				icon: 'male-pilot'
 
 			},
@@ -227,16 +232,36 @@
 				icon: 'package'
 
 			}
-		]
+		];
 		$(function(){
 			$.each( categories, function( key, value ) {
-			$("#category-list").append("<a class='category-item'><i class='em em-" + value.icon + "'></i>" + value.name + "</a>");
+			$("#category-list").append("<a class='category-item animated fadeIn' data-filterby='"+value.name.replace(/\s+/g, '-').replace(/\//g, '-').toLowerCase()+"'><i class='em em-" + value.icon + "'></i>" + value.name + "</a>");
 			});
 
 			$.getJSON("https://spreadsheets.google.com/feeds/list/1jXJ7ckJ_Biicn6WV9c2S-S0-n0RpgAeVvf61qjAfRDs/od6/public/values?alt=json", function(data) {
 				$.each(data.feed.entry, function( key, value ) {
-				  	$(".profile-card-section").append("<div class='profile-card'><img src='" + value['gsx$photo']['$t'] + "' onerror='this.onerror=null;this.src=`img/default-dp.png`;' class='profile-card-dp'><div class='profile-card-details'><div class='row'><div class='col-md-9'><h3 class='profile-card-name'>" + value['gsx$name']['$t'] + "</h3><h6 class='profile-card-location'>"+value['gsx$location']['$t']+"</h6><p class='profile-card-bio'>"+value['gsx$bio']['$t']+"</p><p class='profile-card-category'>"+value['gsx$categories']['$t']+"</p></div><div class='col-md-3'><a class='profile-card-cta' target='_blank' href='"+value['gsx$portfolio']['$t']+"'>Portfolio</a></div></div></div></div>");
-				});				
+
+					var categories = value['gsx$categories']['$t'].split(',');
+					var id = value['id']['$t'].slice(-5);
+					console.log(categories);
+
+				  	$(".profile-card-section").append("<div id='"+id+"' class='profile-card animated fadeIn'><img src='" + value['gsx$photo']['$t'] + "' onerror='this.onerror=null;this.src=`img/default-dp.png`;' class='profile-card-dp'><div class='profile-card-details'><div class='row'><div class='col-md-9'><h3 class='profile-card-name'>" + value['gsx$name']['$t'] + "</h3><h6 class='profile-card-location'>"+value['gsx$location']['$t']+"</h6><p class='profile-card-bio'>"+value['gsx$bio']['$t']+"</p><p class='profile-card-category'>"+value['gsx$categories']['$t']+"</p></div><div class='col-md-3'><a class='profile-card-cta' target='_blank' href='"+value['gsx$portfolio']['$t']+"'>Portfolio</a></div></div></div></div>");
+
+					$.each(categories, function( key, value ) {
+						$("#" + id).attr("data-" + value.replace(/\s+/g, '-').replace(/\//g, '-').toLowerCase(), true);
+					});
+
+
+				});	
+				$(".category-item").click(function(){
+					$(".profile-card").removeClass("hide");
+
+					var filter = $(this).attr("data-filterby");
+					console.log("Filter by ", filter);
+					console.log($(["data-" + filter]));
+					$(".profile-card").not('[data-' + filter + ']').addClass("hide");
+					// $('[data-product-designer]').addClass("hide");
+				});			
 			})
 			.fail(function (jqxhr, status, error) { 
 				console.log('error', status, error) }
