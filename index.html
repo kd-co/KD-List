@@ -14,7 +14,7 @@
 <body>
 	<div class="nav-section animated fadeIn">
 		<nav class="nav">
-			<a class="logo-container" href="http://kdco.info/">
+			<a class="logo-container" id="logo-container" onclick="clearFilters()">
 	          	<svg version="1.1" id="kdco-logo" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="324px" height="218px" viewBox="0 0 324 218" enable-background="new 0 0 324 218" xml:space="preserve" class="main-logo">
 					<g id="logomark">
 						<path fill="#010101" d="M106.082,170.363c-9.554,0-17.327,7.773-17.327,17.327c0,1.554,0.225,3.052,0.61,4.485
@@ -160,11 +160,17 @@
 					</g>
 				</svg>
 			</a>
+
+			<a class="mob-filters" onclick="toggleMobFilters()">
+				<img id="filter-icon" src="img/filter-icon.png">
+				<img id="close-icon" class="hide" src="img/close-icon.png">
+			</a>
+
 			<!-- <a class="page-header-container">
 				The<br/>KD List
 			</a> -->
 			<div id="category-list" class="category-list">
-				<i class="em em-some-emoji"></i>
+				<a onclick="toggleMobFilters()" class="category-list-apply-mob">Apply filters</a>
 			</div>
 		</nav>
 	</div>
@@ -233,9 +239,29 @@
 
 			}
 		];
+
+		var filters = [];
+
+		function toggleMobFilters(){
+			$("#category-list").toggleClass("hide");
+			$(".profile-card-section").toggleClass("hide");
+			if($("#category-list").is(":hidden")){
+				$("#filter-icon").removeClass("hide");
+				$("#close-icon").addClass("hide");
+			} else {
+				$("#close-icon").removeClass("hide");
+				$("#filter-icon").addClass("hide");
+			}
+		}
+
 		$(function(){
+
+			if(window.innerWidth<=1024){
+				$("#category-list").addClass("hide");
+			}
+
 			$.each( categories, function( key, value ) {
-			$("#category-list").append("<a class='category-item animated fadeIn' data-filterby='"+value.name.replace(/\s+/g, '-').replace(/\//g, '-').toLowerCase()+"'><i class='em em-" + value.icon + "'></i>" + value.name + "</a>");
+			$("#category-list").append("<a class='category-item animated fadeIn' data-filterby='"+value.name.replace(/\s+/g, '-').replace(/\//g, '-').toLowerCase()+"'><i class='em em-" + value.icon + "'></i>" + value.name + "<img src='img/check.png' class='category-item-checkmark'></a>");
 			});
 
 			$.getJSON("https://spreadsheets.google.com/feeds/list/1jXJ7ckJ_Biicn6WV9c2S-S0-n0RpgAeVvf61qjAfRDs/od6/public/values?alt=json", function(data) {
@@ -254,19 +280,38 @@
 
 				});	
 				$(".category-item").click(function(){
-					$(".profile-card").removeClass("hide");
-
-					var filter = $(this).attr("data-filterby");
-					console.log("Filter by ", filter);
-					console.log($(["data-" + filter]));
-					$(".profile-card").not('[data-' + filter + ']').addClass("hide");
-					// $('[data-product-designer]').addClass("hide");
+					console.log(filters.indexOf($(this).attr("data-filterby")));
+					if(filters.indexOf($(this).attr("data-filterby")) == -1){
+						$(this).addClass("category-item-active");
+						$(".profile-card").removeClass("hide");
+						filters.push($(this).attr("data-filterby"));
+						console.log("Filter by ", filters);
+						$.each(filters, function( key, value ) {
+							$(".profile-card").not('[data-' + value + ']').addClass("hide");
+						});
+					} else {
+						var index = filters.indexOf($(this).attr("data-filterby"));
+						$(this).removeClass("category-item-active");
+						if (index > -1) {
+							filters.splice(index, 1);
+							console.log("Filter by ", filters);
+							$(".profile-card").removeClass("hide");
+							$.each(filters, function( key, value ) {
+								$(".profile-card").not('[data-' + value + ']').addClass("hide");
+							});
+						}
+					}			
 				});			
 			})
 			.fail(function (jqxhr, status, error) { 
 				console.log('error', status, error) }
 			);
 		});
+
+		function clearFilters(){
+			$(".category-item").removeClass("category-item-active");		
+			$(".profile-card").removeClass("hide");		
+		}
 	</script>
 </body>
 </html>

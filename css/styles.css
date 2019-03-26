@@ -1,5 +1,5 @@
 /*@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');*/
-@import url('https://fonts.googleapis.com/css?family=Montserrat:200,400,700,900');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900');
 
 /* Meera */
 @font-face {
@@ -30,7 +30,7 @@ a{
     overflow-x: hidden;
 }
 .hide{
-	display: none;
+	display: none !important;
 }
 .logo-container, #kdco-logo{
     width: 170px;
@@ -47,18 +47,37 @@ a{
 	margin-top: 10px;
 }
 .category-list{
-	margin-top: 10px;
+	margin-top: 15px;
 	width: 250px;
 }
 .category-item{
 	display: block;
 	font-size: 0.9em;
 	padding: 14px 15px 14px 0px;
-	color: #333;
+	color: #666;
 	cursor: pointer;
 	/*border-radius: 3px;*/
 	background: #fff;
 	transition: all 0.1s ease-in-out;
+	font-weight: 300;
+	position: relative;
+}
+.category-item-active{
+	font-weight: 700;
+	color: #222;
+}
+.category-item-checkmark{
+	position: absolute;
+	width: 16px;
+	height: 16px;
+	right: 30px;
+	top: 17px;
+	border-radius: 1000px;
+	opacity: 0;
+	transition: all 0.1s ease-in-out;
+}
+.category-item-active .category-item-checkmark{
+	opacity: 1;
 }
 .category-item .em{
 	margin-right: 10px;
@@ -66,8 +85,7 @@ a{
 	top: -2px;
 }
 .category-item:hover{
-	padding: 14px 15px 14px 15px;
-	background: rgba(0,0,0,0.05);
+	color: #000;
 }
 .nav-section{
 	display: inline-block;
@@ -110,7 +128,7 @@ a{
 	font-weight: 700;
 	color: #222;
 	margin: 0px 0px 5px 0px;
-	font-size: 24px;
+	font-size: 20px;
 	position: relative;
 }
 .profile-card-location{
@@ -125,7 +143,7 @@ a{
 	font-weight: 200;
 	color: #444;
 	margin: 0px 0px 10px 0px;
-	font-size: 16px;
+	font-size: 15px;
 	line-height: 1.6;
 	position: relative;
 }
@@ -150,4 +168,85 @@ a{
 .profile-card-cta:hover{
 	background: #222;
 	color: #fff;
+}
+.mob-filters{
+	display: none;	
+}
+.category-list-apply-mob{
+	display: none;
+}
+
+@media(max-width: 800px){
+	.logo-container, #kdco-logo {
+	    width: 100px;
+	    height: 67px;
+	    margin-left: -2px;
+	}
+	.nav{
+		height: auto;
+	}
+	.nav-section{
+		display: block;
+		width: 100%;
+	}
+	.category-list {
+	    width: 100%;
+	    padding-bottom: 80px;
+		position: relative;
+	}
+	.category-list-apply-mob{
+		position: fixed;
+	    bottom: 15px;
+	    padding: 13px;
+	    width: calc(100% - 40px);
+	    display: block;
+	    background: #222;
+	    z-index: 999;
+	    color: #fff;
+	    text-align: center;
+	}
+	.category-item-checkmark {
+    	right: 0px;
+	    top: 16px;
+	}
+	.profile-card-section {
+	    display: block;    
+	    width: 100%;
+	    padding: 15px;
+	}
+	.profile-card-dp {
+    	height: 70px;
+    	width: 70px;
+	}
+	.profile-card {
+    	padding-left: 90px;
+	}
+	.profile-card-cta{
+		margin-top: 20px;
+	    display: inline-block;
+	    width: auto;
+	    padding: 10px 20px;
+	    font-size: 14px;
+	}
+	.profile-card-name{
+		font-size: 18px;
+	}
+	.profile-card-location{
+		font-size: 13px;
+	}
+	.profile-card-bio{
+		font-size: 14px;
+	}
+	.profile-card-category{
+		font-size: 14px;
+	}
+	.mob-filters{
+		display: inline-block;
+		float: right;
+		padding: 15px 0px;
+	}
+	.mob-filters img{
+		width: 24px;
+		height: auto;
+	}
 }
