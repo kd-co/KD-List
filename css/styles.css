@@ -99,26 +99,31 @@ a{
 	float: left;
 	padding: 30px 15px 30px 30px;
 }
+.profile-card-li{
+	/*float: right;*/
+}
 .profile-card{
 	position: relative;
-	border-bottom: 1px solid #ddd;
+	border: 1px solid #ddd;
 	/*background: #000;*/
-	padding-left: 130px;
-	padding-top: 5px;
+	padding: 20px;
+	border-radius: 2px;
 	margin-bottom: 20px;
+	text-align: center;
+	height: 385px;
 }
 .profile-card:last-child{
 	/*border-bottom: none;*/
 }
 .profile-card-dp{
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	height: 110px;
-	width: 110px;
-	border-radius: 1000px;
-	margin-bottom: 20px;
-	object-fit: cover;
+    height: 110px;
+    width: 110px;
+    border-radius: 1000px;
+    margin-bottom: -15px;
+    object-fit: cover;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 .profile-card-details{
 	min-height: 130px;
@@ -127,47 +132,64 @@ a{
 .profile-card-name{
 	font-weight: 700;
 	color: #222;
-	margin: 0px 0px 5px 0px;
+	margin: 10px 0px 7px 0px;
 	font-size: 20px;
 	position: relative;
 }
 .profile-card-location{
-	font-weight: 400;
-	color: #aaa;
-	margin: 0px 0px 5px 0px;
-	font-size: 14px;
-	text-transform: uppercase;
-	position: relative;
+    font-weight: 600;
+    color: #fff;
+    margin: 0px auto 5px auto;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 1000px;
+    background: #000;
+    border: 2px solid #fff;
+    text-transform: uppercase;
+    display: inline-block;
 }
 .profile-card-bio{
-	font-weight: 200;
-	color: #444;
-	margin: 0px 0px 10px 0px;
-	font-size: 15px;
-	line-height: 1.6;
-	position: relative;
+    font-weight: 200;
+    color: #444;
+    margin: 0px 0px 10px 0px;
+    font-size: 14px;
+    line-height: 1.5;
+    position: relative;
+    height: 6.2em;
 }
 .profile-card-category{
 	font-weight: 400;
-	color: #444;
-	margin: 0px;
+	color: #222;
+	margin: 0px 0px 10px 0px;
 	font-size: 15px;
+	line-height: 1.5;
 	position: relative;
+	max-height: 1.5em;
+	overflow: hidden;
 }
 .profile-card-cta{
 	/*border-radius: 3px;*/
-	border: 1px solid #222;
+	margin: -20px;
+	background: #222;
 	display: block;
-	width: 100%;
-	padding: 13px;
+	padding: 16px;
 	text-align: center;
-	color: #222;
+	color: #fff;
 	transition: all 0.1s ease-in-out;
 	cursor: pointer;
+	margin-top: 10px;
+	border-radius: 0px 0px 2px 2px;
 }
 .profile-card-cta:hover{
 	background: #222;
 	color: #fff;
+}
+.profile-card-sm-item{
+	display: inline-block;
+	margin: 10px 5px;
+}
+.profile-card-sm-item img{
+	max-width: 26px;
 }
 .mob-filters{
 	display: none;	
@@ -175,6 +197,45 @@ a{
 .category-list-apply-mob{
 	display: none;
 }
+
+@keyframes placeHolderShimmer{
+    0%{
+        background-position: -400px 0
+    }
+    100%{
+        background-position: 400px 0
+    }
+}
+.animated-background {
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: #f6f7f8 !important;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%) !important;
+    background-size: 800px 104px !important;
+    position: relative;
+}
+.content-placeholder-dp {
+	margin: 5px auto 20px auto;
+	height: 110px; width: 110px;
+	border-radius: 100%;
+}
+.content-placeholder-header{
+	height: 25px;
+	width: 50%;
+	margin: 15px auto;
+}
+.content-placeholder-desc {
+	width: 80%;
+	height: 15px;
+	display: inline-block;
+}
+.animated-background.profile-card-location {
+	width: 60px;
+}
+
 
 @media(max-width: 800px){
 	.logo-container, #kdco-logo {

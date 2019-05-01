@@ -172,146 +172,252 @@
 			<div id="category-list" class="category-list">
 				<a onclick="toggleMobFilters()" class="category-list-apply-mob">Apply filters</a>
 			</div>
+
+			<div id="categories">
+				<ul style="display: block; padding: 0px;" class="list">
+					
+				</ul>
+			</div>
 		</nav>
 	</div>
-	<div class="profile-card-section">
+	<div class="profile-card-section" id="designers">
+
+		<!-- <input class="search" placeholder="Search" />
+		<button class="sort" data-sort="name">Sort</button> -->
+
+		<ul style="display: none; margin-top: 0px; padding: 0px;" class="row animated fadeIn" id="profile-card-loader">
+			<li style="display:block;" class="col-md-4 profile-card-li">
+			  	<div class='profile-card center'>
+					<div class='profile-card-dp animated-background content-placeholder-dp'></div>
+					<!-- <div class='profile-card-location animated-background'></div> -->
+					<div class='profile-card-name name animated-background content-placeholder-header'></div>
+					<div class='profile-card-category animated-background categories content-placeholder-desc'></div>
+				</div>
+			</li>
+			<li style="display:block;" class="col-md-4 profile-card-li">
+			  	<div class='profile-card center'>
+					<div class='profile-card-dp animated-background content-placeholder-dp'></div>
+					<!-- <div class='profile-card-location animated-background'></div> -->
+					<div class='profile-card-name name animated-background content-placeholder-header'></div>
+					<div class='profile-card-category animated-background categories content-placeholder-desc'></div>
+				</div>
+			</li>
+			<li style="display:block;" class="col-md-4 profile-card-li">
+			  	<div class='profile-card center'>
+					<div class='profile-card-dp animated-background content-placeholder-dp'></div>
+					<!-- <div class='profile-card-location animated-background'></div> -->
+					<div class='profile-card-name name animated-background content-placeholder-header'></div>
+					<div class='profile-card-category animated-background categories content-placeholder-desc'></div>
+				</div>
+			</li>
+		</ul>
 		
+		<div style="margin-top: 0px; padding: 0px;" class="row list animated fadeIn">
+			
+		</div>
 	</div>
+
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+	<script src="js/list.min.js"></script>
+
 	<script type="text/javascript">
-		var categories = [
+		
+		var designersList;
+
+		var options = {
+		  valueNames: [ 
+		  	'name', 
+		  	{ name: 'image',
+		  	  attr: 'src',
+		  	}, 
+		  	'location', 
+		  	'bio', 
+		  	'categories', 
+		  	{ name: 'portfolio',
+		  	  attr: 'href',
+		  	},
+		  	{ name: 'facebook',
+		  	  attr: 'href',
+		  	},
+		  	{ name: 'twitter',
+		  	  attr: 'href',
+		  	},
+		  	{ name: 'linkedin',
+		  	  attr: 'href',
+		  	},
+		  	{ name: 'dribbble',
+		  	  attr: 'href',
+		  	},
+		  	{ name: 'behance',
+		  	  attr: 'href',
+		  	},
+	  		],
+
+		  item: `<div style="display:block;" class="col-md-4 profile-card-li">
+		  	<div class='profile-card'>
+				<img class='profile-card-dp image' src=''>
+				<p class='profile-card-location location'></p>
+				<h3 class='profile-card-name name'></h3>
+				<h6 class='profile-card-category categories'></h6>
+				<p class='profile-card-bio bio'></p>
+				<div class='profile-card-sm-container'>
+					<a class='profile-card-sm-item facebook'>
+						<img src='img/facebook-icon.png'>
+					</a>
+					<a class='profile-card-sm-item twitter'>
+						<img src='img/twitter-icon.png'>
+					</a>
+					<a class='profile-card-sm-item linkedin'>
+						<img src='img/linkedin-icon.png'>
+					</a>
+					<a class='profile-card-sm-item behance'>
+						<img src='img/behance-icon.png'>
+					</a>
+					<a class='profile-card-sm-item dribbble'>
+						<img src='img/dribbble-icon.png'>
+					</a>
+					<a class='profile-card-sm-item portfolio'>
+						<img src='img/portfolio-icon.png'>
+					</a>
+				</div>
+			</div>
+		</div>`
+		};
+
+		var values = [];
+
+		$("#profile-card-loader").show();
+		$.getJSON("https://spreadsheets.google.com/feeds/list/1jXJ7ckJ_Biicn6WV9c2S-S0-n0RpgAeVvf61qjAfRDs/od6/public/values?alt=json", function(data) {
+			$.each(data.feed.entry, function( key, value ) {
+				var name = value['gsx$name']['$t'];
+				var image = value['gsx$photo']['$t'];
+				var location = value['gsx$location']['$t'];
+				var bio = value['gsx$bio']['$t'];
+				var categories = value['gsx$categories']['$t'].split(',');
+				var portfolio = value['gsx$portfolio']['$t'];
+				var facebook = value['gsx$facebook']['$t'];
+				var twitter = value['gsx$twitter']['$t'];
+				var linkedin = value['gsx$linkedin']['$t'];
+				var behance = value['gsx$behance']['$t'];
+				var dribbble = value['gsx$dribbble']['$t'];
+				var obj = {
+					name: name,
+					image: image,
+					location: location,
+					bio: bio,
+					categories: categories,
+					portfolio: portfolio,
+					facebook: facebook,
+					twitter: twitter,
+					linkedin: linkedin,
+					behance: behance,
+					dribbble: dribbble
+				}
+				values.push(obj);
+				console.log(obj);
+			});
+			designersList = new List('designers', options, values);	
+			console.log(designersList);
+			$("#profile-card-loader").hide();
+		});
+
+		var category_options = {
+			valueNames: [
+				'name',
+				{
+					name: 'icon',
+					attr: 'class',
+				},
+			],
+			item : `<a onclick='filterTemp(this)' class='category-item animated fadeIn'><i class='icon'></i><img src='img/check.png' class='category-item-checkmark'><span class='name'></span></a>`
+		};
+
+		var category_values = [
 			{ 
 				name: 'Product Designer', 
-				icon: 'iphone'
+				icon: 'em em-iphone'
 			},
 			{ 
 				name: 'Graphic Designer', 
-				icon: 'frame_with_picture'
+				icon: 'em em-frame_with_picture'
 			},
 			{ 
 				name: 'Illustrator',
-				icon: 'lower_left_paintbrush'
+				icon: 'em em-lower_left_paintbrush'
 
 			},
 			{ 
 				name: 'Developer',
-				icon: 'computer'
+				icon: 'em em-computer'
 
 			},
 			{ 
 				name: 'Web Designer', 
-				icon: 'spider_web'
+				icon: 'em em-spider_web'
 
 			},
 			{ 
 				name: 'Engineer', 
-				icon: 'robot_face'
+				icon: 'em em-robot_face'
 
 			},
 			{ 
 				name: 'Brand Designer', 
-				icon: 'tada'
+				icon: 'em em-tada'
 
 			},
 			{ 
 				name: 'Founder', 
-				icon: 'rocket'
+				icon: 'em em-rocket'
 
 			},
 			{ 
 				name: 'Lead', 
-				icon: 'face_with_cowboy_hat'
+				icon: 'em em-face_with_cowboy_hat'
 
 			},
 			{ 
 				name: 'Creative Director', 
-				icon: 'male-pilot'
+				icon: 'em em-male-pilot'
 
 			},
 			{ 
 				name: 'Writer', 
-				icon: 'lower_left_ballpoint_pen'
+				icon: 'em em-lower_left_ballpoint_pen'
 
 			},
 			{ 
 				name: '3D Artist',
-				icon: 'package'
-
+				icon: 'em em-package'
 			}
-		];
+		]
 
-		var filters = [];
+		var categoriesList = new List('categories', category_options, category_values);
 
-		function toggleMobFilters(){
-			$("#category-list").toggleClass("hide");
-			$(".profile-card-section").toggleClass("hide");
-			if($("#category-list").is(":hidden")){
-				$("#filter-icon").removeClass("hide");
-				$("#close-icon").addClass("hide");
-			} else {
-				$("#close-icon").removeClass("hide");
-				$("#filter-icon").addClass("hide");
+		var selectedFilters = [];
+
+		console.log(categoriesList);
+
+		function filterTemp(elem){
+
+			var selectedItem = $(elem).find('.name').text();
+			if(!selectedFilters.includes(selectedItem)){
+				selectedFilters.push(selectedItem);
+				$(elem).addClass('category-item-active');
+			} else{
+				selectedFilters = selectedFilters.filter(e => e !== selectedItem);
+				$(elem).removeClass('category-item-active');
 			}
-		}
-
-		$(function(){
-
-			if(window.innerWidth<=1024){
-				$("#category-list").addClass("hide");
-			}
-
-			$.each( categories, function( key, value ) {
-			$("#category-list").append("<a class='category-item animated fadeIn' data-filterby='"+value.name.replace(/\s+/g, '-').replace(/\//g, '-').toLowerCase()+"'><i class='em em-" + value.icon + "'></i>" + value.name + "<img src='img/check.png' class='category-item-checkmark'></a>");
+			designersList.filter(function(item) {
+				if (selectedFilters.every(r=> item.values().categories.includes(r))) {
+				   return true;
+				} else {
+				   return false;
+				}
 			});
-
-			$.getJSON("https://spreadsheets.google.com/feeds/list/1jXJ7ckJ_Biicn6WV9c2S-S0-n0RpgAeVvf61qjAfRDs/od6/public/values?alt=json", function(data) {
-				$.each(data.feed.entry, function( key, value ) {
-
-					var categories = value['gsx$categories']['$t'].split(',');
-					var id = value['id']['$t'].slice(-5);
-					console.log(categories);
-
-				  	$(".profile-card-section").append("<div id='"+id+"' class='profile-card animated fadeIn'><img src='" + value['gsx$photo']['$t'] + "' onerror='this.onerror=null;this.src=`img/default-dp.png`;' class='profile-card-dp'><div class='profile-card-details'><div class='row'><div class='col-md-9'><h3 class='profile-card-name'>" + value['gsx$name']['$t'] + "</h3><h6 class='profile-card-location'>"+value['gsx$location']['$t']+"</h6><p class='profile-card-bio'>"+value['gsx$bio']['$t']+"</p><p class='profile-card-category'>"+value['gsx$categories']['$t']+"</p></div><div class='col-md-3'><a class='profile-card-cta' target='_blank' href='"+value['gsx$portfolio']['$t']+"'>Portfolio</a></div></div></div></div>");
-
-					$.each(categories, function( key, value ) {
-						$("#" + id).attr("data-" + value.replace(/\s+/g, '-').replace(/\//g, '-').toLowerCase(), true);
-					});
-
-
-				});	
-				$(".category-item").click(function(){
-					console.log(filters.indexOf($(this).attr("data-filterby")));
-					if(filters.indexOf($(this).attr("data-filterby")) == -1){
-						$(this).addClass("category-item-active");
-						$(".profile-card").removeClass("hide");
-						filters.push($(this).attr("data-filterby"));
-						console.log("Filter by ", filters);
-						$.each(filters, function( key, value ) {
-							$(".profile-card").not('[data-' + value + ']').addClass("hide");
-						});
-					} else {
-						var index = filters.indexOf($(this).attr("data-filterby"));
-						$(this).removeClass("category-item-active");
-						if (index > -1) {
-							filters.splice(index, 1);
-							console.log("Filter by ", filters);
-							$(".profile-card").removeClass("hide");
-							$.each(filters, function( key, value ) {
-								$(".profile-card").not('[data-' + value + ']').addClass("hide");
-							});
-						}
-					}			
-				});			
-			})
-			.fail(function (jqxhr, status, error) { 
-				console.log('error', status, error) }
-			);
-		});
-
-		function clearFilters(){
-			$(".category-item").removeClass("category-item-active");		
-			$(".profile-card").removeClass("hide");		
 		}
+
 	</script>
+
 </body>
 </html>
