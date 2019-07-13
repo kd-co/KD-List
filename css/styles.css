@@ -235,7 +235,24 @@ a{
 .animated-background.profile-card-location {
 	width: 60px;
 }
-
+.empty-state{
+	text-align: center;
+	margin-top: 15%;
+}
+.empty-state img{
+	border-radius: 6px;
+	max-height: 200px;
+}
+.empty-state h2{
+	color: #333;
+	font-size: 1.6em;
+	margin-bottom: 0;
+}
+.empty-state p{
+	margin-top: 10px;
+	color: #666;
+	font-size: 1.1em;
+}
 
 @media(max-width: 800px){
 	.logo-container, #kdco-logo {

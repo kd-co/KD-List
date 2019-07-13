@@ -212,9 +212,18 @@
 			</li>
 		</ul>
 		
-		<div style="margin-top: 0px; padding: 0px;" class="row list animated fadeIn">
+		<div id="profile-list" style="margin-top: 0px; padding: 0px;" class="row list animated fadeIn">
 			
 		</div>
+
+		<div class="row animated fadeIn" id="empty-container" style="display: none;">
+			<div class="col-md-8 col-md-offset-2 center empty-state">
+				<img src="img/empty.png">
+				<h2>എവിടെ? ഡിസൈനർമാർ എവിടെ?</h2>
+				<p>ഇല്ല സാർ, ഇവിടെ ഡിസൈനർമാർ ഇല്ല സാർ. ഫിൽട്ടറുകൾ മാറ്റി ഒന്ന് കൂടി ട്രൈ ചെയ്തു നോക്കാം.</p>
+			</div>
+		</div>
+
 	</div>
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
@@ -410,8 +419,13 @@
 			}
 			designersList.filter(function(item) {
 				if (selectedFilters.every(r=> item.values().categories.includes(r))) {
+				   $("#empty-container").hide();
+				   $("#profile-list").show();
 				   return true;
 				} else {
+				   $("#profile-list").hide();
+				   $("#empty-container").show();
+				   console.log("No results found");
 				   return false;
 				}
 			});
