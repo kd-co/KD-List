@@ -42,7 +42,7 @@ a{
 .category-item{
 	display: block;
 	font-size: 0.9em;
-	padding: 13px 15px 13px 0px;
+	padding: 12px 15px 12px 30px;
 	color: #666;
 	cursor: pointer;
 	/*border-radius: 3px;*/
@@ -50,6 +50,17 @@ a{
 	transition: all 0.1s ease-in-out;
 	font-weight: 400;
 	position: relative;
+}
+.category-item:before{
+	content: '';
+	position: absolute;
+	left: 0px;
+	top: 14px;
+	display: inline-block;
+	border: 1px solid #999;
+	border-radius: 1000px;
+	height: 16px;
+	width: 16px;
 }
 .category-item-active{
 	font-weight: 700;
@@ -59,8 +70,8 @@ a{
 	position: absolute;
 	width: 16px;
 	height: 16px;
-	right: 30px;
-	top: 17px;
+	left: 0px;
+	top: 14px;
 	border-radius: 1000px;
 	opacity: 0;
 	transition: all 0.1s ease-in-out;
@@ -250,7 +261,7 @@ a{
 	padding: 15px 30px;
 	font-size: 15px;
 	color: #fff;
-	font-weight: 600;
+	font-weight: 500;
 	background: #000;
 	position: fixed;
 	right: 20px;
@@ -273,6 +284,13 @@ a{
 	}
 }
 @media(max-width: 800px){
+	.nominate-fab{
+	    left: 0px;
+	    right: 0px;
+	    margin: 0 auto;
+	    width: 180px;
+	    text-align: center;
+	}
 	.categories-bar{
 		display: none;
 		position: fixed;
@@ -282,11 +300,11 @@ a{
 		bottom: 0px;
 		padding: 0px 20px 20px 20px;
 		background: #fff;
-		height: calc(100vh - 90px);
-		overflow: auto;
 	}
 	.categories-bar .list{
 		padding-bottom: 60px !important;
+		height: calc(100vh - 140px);
+		overflow: auto;
 	}
 
 	.logo-container, #kdco-logo {
@@ -305,26 +323,29 @@ a{
 	}
 	.category-list-apply-mob{
 		position: fixed;
-	    bottom: 15px;
-	    padding: 13px;
+	    bottom: 20px;
+	    padding: 15px;
 	    width: calc(100% - 40px);
 	    display: block;
-	    background: #222;
+	    font-size: 15px;
+	    font-weight: 500;
+	    background: #000;
 	    z-index: 999;
 	    color: #fff;
 	    text-align: center;
+        border-radius: 1000px;
 	}
 	.category-item-checkmark {
     	right: 0px;
-	    top: 16px;
+	    top: 14px;
 	}
 	.category-item{
-		padding: 12px 15px 12px 0px;
+		padding: 12px 15px 12px 30px;
 	}
 	.profile-card-section {
 	    display: block;    
 	    width: 100%;
-	    padding: 15px;
+	    padding: 15px 15px 70px 15px;
 	}
 	.profile-card-dp {
     	height: 70px;

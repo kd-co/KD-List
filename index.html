@@ -264,7 +264,7 @@
 	  		],
 
 		  item: `<div style="display:block;" class="col-md-4 profile-card-li">
-		  	<div class='profile-card'>
+		  	<div class='profile-card animated fadeIn'>
 				<img class='profile-card-dp image' src=''>
 				<p class='profile-card-location location'></p>
 				<h3 class='profile-card-name name'></h3>
@@ -301,8 +301,6 @@
 		$("#profile-card-loader").show();
 		$.getJSON("https://api.sheety.co/407b488f-30ff-4d32-b005-4678da61776f", function(data) {
 
-			console.log(data, 909090);
-
 			$.each(data, function( key, value ) {
 				var name = value['yourName'];
 				var image = value['photo']?value['photo']:null;
@@ -311,6 +309,9 @@
 				var location = value['location'];
 				var bio = value['shortBio'];
 				var categories = value['categories'].split(',');
+				categories.forEach(function(item, i) {
+				    this[i] = item.replace(/^\s/, '');
+				}, categories);
 				var portfolio = value['linkToPersonalWebsite']?value['linkToPersonalWebsite']:null;
 				var facebook = value['facebookProfileLink']?value['facebookProfileLink']:null;
 				var twitter = value['twitterProfileLink']?value['twitterProfileLink']:null;
@@ -418,6 +419,7 @@
 		function filterTemp(elem){
 
 			var selectedItem = $(elem).find('.name').text();
+
 			if(!selectedFilters.includes(selectedItem)){
 				selectedFilters.push(selectedItem);
 				$(elem).addClass('category-item-active');
@@ -425,17 +427,37 @@
 				selectedFilters = selectedFilters.filter(e => e !== selectedItem);
 				$(elem).removeClass('category-item-active');
 			}
+
+
 			designersList.filter(function(item) {
-				if (selectedFilters.every(r=> item.values().categories.includes(r))) {
-				   $("#empty-container").hide();
-				   $("#profile-list").show();
-				   return true;
+				
+				intersection = item.values().categories.filter(element => selectedFilters.includes(element));
+
+				if(intersection.length==selectedFilters.length){
+					return true;
 				} else {
-				   $("#profile-list").hide();
-				   $("#empty-container").show();
-				   console.log("No results found");
-				   return false;
+					return false;
 				}
+
+				console.log(intersection, intersection.length);
+
+				// if (item.values().categories.includes(selectedFilters)) {
+				//    $("#profile-list").show();
+
+				//    return true;
+				// } else {
+				//    return false;
+				// }
+
+				// if (selectedFilters.every(r=> item.values().categories.includes(r))) {
+				//    $("#empty-container").hide();
+				//    $("#profile-list").show();
+				//    return true;
+				// }  else {
+				//    $("#empty-container").show();
+				//    $("#profile-list").hide();
+				//    return false;
+				// }
 			});
 		}
 
@@ -448,6 +470,7 @@
 
 		function toggleMobFilters(){
 			$(".categories-bar").toggle();
+			$(".nominate-fab").toggle();
 			document.body.style.overflow = "hidden";
 		}
 
