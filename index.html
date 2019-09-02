@@ -163,7 +163,8 @@
 
 			<a class="mob-filters" onclick="toggleMobFilters()">
 				<img id="filter-icon" src="img/filter-icon.png">
-				<img id="close-icon" class="hide" src="img/close-icon.png">
+				<img id="close-icon" style="display: none;" src="img/close-icon.png">
+				<span class="filter-indicator" style="display: none;"></span>
 			</a>
 
 			<!-- <a class="page-header-container">
@@ -174,7 +175,9 @@
 					
 				</ul>
 
-				<a onclick="toggleMobFilters()" class="category-list-apply-mob">Apply filters</a>
+				<a onclick="toggleMobFilters()" class="category-list-apply-mob">
+					<img src="img/check-line.png">
+				</a>
 
 			</div>
 		</nav>
@@ -420,6 +423,10 @@
 
 			var selectedItem = $(elem).find('.name').text();
 
+			if(selectedItem){
+				$('.category-list-apply-mob').show();	
+			}
+
 			if(!selectedFilters.includes(selectedItem)){
 				selectedFilters.push(selectedItem);
 				$(elem).addClass('category-item-active');
@@ -428,12 +435,12 @@
 				$(elem).removeClass('category-item-active');
 			}
 
-
 			designersList.filter(function(item) {
 				
 				intersection = item.values().categories.filter(element => selectedFilters.includes(element));
 
 				if(intersection.length==selectedFilters.length){
+					$(".filter-indicator").show();
 					return true;
 				} else {
 					return false;
@@ -464,6 +471,7 @@
 		function clearFilters(){
 		   designersList.filter();
 		   $("#empty-container").hide();
+		   $(".filter-indicator").hide();	   
 		   $("#profile-list").show();
 		   $('.category-item').removeClass('category-item-active');
 		}
@@ -471,6 +479,8 @@
 		function toggleMobFilters(){
 			$(".categories-bar").toggle();
 			$(".nominate-fab").toggle();
+			$("#close-icon").toggle();
+			$("#filter-icon").toggle();
 			document.body.style.overflow = "hidden";
 		}
 
