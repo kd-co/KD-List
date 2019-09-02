@@ -1,16 +1,6 @@
 /*@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900');
 
-/* Meera */
-@font-face {
-	font-family: 'Meera';
-	font-style: normal;
-	font-display: swap;
-	font-weight: 700;
-	src: url(https://smc.org.in/downloads/fonts/meera/Meera-Regular.woff2?v=7.0) format('woff2'), url(https://smc.org.in/downloads/fonts/meera/Meera-Regular.woff?v=7.0) format('woff'), url(https://smc.org.in/downloads/fonts/meera/Meera-Regular.ttf?v=7.0) format('truetype');
-	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+0D01-0D7F, U+200C-U+200D, U+25CC;
-}
-
 html,body{
 	/*font-family: 'Noto Sans', sans-serif;*/
 	font-family: 'Montserrat', sans-serif;
@@ -25,7 +15,6 @@ a{
 }
 .nav{
 	padding: 15px 20px;
-    height: 100vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -53,13 +42,13 @@ a{
 .category-item{
 	display: block;
 	font-size: 0.9em;
-	padding: 14px 15px 14px 0px;
+	padding: 13px 15px 13px 0px;
 	color: #666;
 	cursor: pointer;
 	/*border-radius: 3px;*/
 	background: #fff;
 	transition: all 0.1s ease-in-out;
-	font-weight: 300;
+	font-weight: 400;
 	position: relative;
 }
 .category-item-active{
@@ -95,7 +84,7 @@ a{
 }
 .profile-card-section{
 	display: inline-block;
-	width: calc(100vw - 300px);
+	width: 100%;
 	float: left;
 	padding: 30px 15px 30px 30px;
 }
@@ -124,6 +113,7 @@ a{
     display: block;
     margin-left: auto;
     margin-right: auto;
+    background: #eee;
 }
 .profile-card-details{
 	min-height: 130px;
@@ -242,26 +232,67 @@ a{
 .empty-state img{
 	border-radius: 6px;
 	max-height: 200px;
+	margin-bottom: 10px;
 }
 .empty-state h2{
 	color: #333;
-	font-size: 1.6em;
+	font-size: 20px;
 	margin-bottom: 0;
 }
 .empty-state p{
 	margin-top: 10px;
 	color: #666;
-	font-size: 1.1em;
+	font-size: 16px;
 }
-
+.nominate-fab{
+	border-radius: 1000px;
+	display: inline-block;
+	padding: 15px 30px;
+	font-size: 15px;
+	color: #fff;
+	font-weight: 600;
+	background: #000;
+	position: fixed;
+	right: 20px;
+	bottom: 20px;
+	box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+	transition: all 0.1s ease-in-out;
+}
+.nominate-fab:hover{
+	box-shadow: 0px 5px 30px rgba(0,0,0,0.4);
+}
+@media(min-width: 800px){
+	.nav{
+		position: fixed;
+		left: 0px;
+		top: 0px;
+		width: 300px;
+	}
+	.profile-card-section{
+		padding-left: 300px !important;
+	}
+}
 @media(max-width: 800px){
+	.categories-bar{
+		display: none;
+		position: fixed;
+		top: 90px;
+		left: 0px;
+		right: 0px;
+		bottom: 0px;
+		padding: 0px 20px 20px 20px;
+		background: #fff;
+		height: calc(100vh - 90px);
+		overflow: auto;
+	}
+	.categories-bar .list{
+		padding-bottom: 60px !important;
+	}
+
 	.logo-container, #kdco-logo {
 	    width: 100px;
 	    height: 67px;
 	    margin-left: -2px;
-	}
-	.nav{
-		height: auto;
 	}
 	.nav-section{
 		display: block;
@@ -287,6 +318,9 @@ a{
     	right: 0px;
 	    top: 16px;
 	}
+	.category-item{
+		padding: 12px 15px 12px 0px;
+	}
 	.profile-card-section {
 	    display: block;    
 	    width: 100%;
@@ -297,7 +331,10 @@ a{
     	width: 70px;
 	}
 	.profile-card {
-    	padding-left: 90px;
+    	height: auto;
+	}
+	#profile-card-loader .profile-card-li .profile-card{
+		height: 350px !important;
 	}
 	.profile-card-cta{
 		margin-top: 20px;
@@ -314,6 +351,7 @@ a{
 	}
 	.profile-card-bio{
 		font-size: 14px;
+		height: auto;
 	}
 	.profile-card-category{
 		font-size: 14px;
@@ -326,5 +364,9 @@ a{
 	.mob-filters img{
 		width: 24px;
 		height: auto;
+	}
+	.profile-card-section{
+		position: relative;
+		z-index: -1;
 	}
 }

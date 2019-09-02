@@ -169,14 +169,13 @@
 			<!-- <a class="page-header-container">
 				The<br/>KD List
 			</a> -->
-			<div id="category-list" class="category-list">
-				<a onclick="toggleMobFilters()" class="category-list-apply-mob">Apply filters</a>
-			</div>
-
-			<div id="categories">
+			<div id="categories" class="categories-bar">
 				<ul style="display: block; padding: 0px;" class="list">
 					
 				</ul>
+
+				<a onclick="toggleMobFilters()" class="category-list-apply-mob">Apply filters</a>
+
 			</div>
 		</nav>
 	</div>
@@ -219,12 +218,14 @@
 		<div class="row animated fadeIn" id="empty-container" style="display: none;">
 			<div class="col-md-8 col-md-offset-2 center empty-state">
 				<img src="img/empty.png">
-				<h2>എവിടെ? ഡിസൈനർമാർ എവിടെ?</h2>
-				<p>ഇല്ല സാർ, ഇവിടെ ഡിസൈനർമാർ ഇല്ല സാർ. ഫിൽട്ടറുകൾ മാറ്റി ഒന്ന് കൂടി ട്രൈ ചെയ്തു നോക്കാം.</p>
+				<h2>No profiles found!</h2>
+				<p>Sorry, we couldn't find any profiles for that category. <a class="normal-link" onclick="clearFilters()">Clear the filters</a> or try again later.</p>
 			</div>
 		</div>
 
 	</div>
+
+	<a class="nominate-fab" href="https://forms.gle/V7LKEn7iHZb4CvNt7" target="_blank">Nominate a KD</a>
 
 	<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
 	<script src="js/list.min.js"></script>
@@ -295,20 +296,27 @@
 
 		var values = [];
 
+
+
 		$("#profile-card-loader").show();
-		$.getJSON("https://spreadsheets.google.com/feeds/list/1jXJ7ckJ_Biicn6WV9c2S-S0-n0RpgAeVvf61qjAfRDs/od6/public/values?alt=json", function(data) {
-			$.each(data.feed.entry, function( key, value ) {
-				var name = value['gsx$name']['$t'];
-				var image = value['gsx$photo']['$t'];
-				var location = value['gsx$location']['$t'];
-				var bio = value['gsx$bio']['$t'];
-				var categories = value['gsx$categories']['$t'].split(',');
-				var portfolio = value['gsx$portfolio']['$t'];
-				var facebook = value['gsx$facebook']['$t'];
-				var twitter = value['gsx$twitter']['$t'];
-				var linkedin = value['gsx$linkedin']['$t'];
-				var behance = value['gsx$behance']['$t'];
-				var dribbble = value['gsx$dribbble']['$t'];
+		$.getJSON("https://api.sheety.co/407b488f-30ff-4d32-b005-4678da61776f", function(data) {
+
+			console.log(data, 909090);
+
+			$.each(data, function( key, value ) {
+				var name = value['yourName'];
+				var image = value['photo']?value['photo']:null;
+				image = image.split('?id=')[1];
+				image = 'https://drive.google.com/uc?export=view&id=' + image;
+				var location = value['location'];
+				var bio = value['shortBio'];
+				var categories = value['categories'].split(',');
+				var portfolio = value['linkToPersonalWebsite']?value['linkToPersonalWebsite']:null;
+				var facebook = value['facebookProfileLink']?value['facebookProfileLink']:null;
+				var twitter = value['twitterProfileLink']?value['twitterProfileLink']:null;
+				var linkedin = value['gsx$linkedin']?value['gsx$linkedin']:null;
+				var behance = value['behanceProfileLink']?value['behanceProfileLink']:null;
+				var dribbble = value['dribbbleProfileLink']?value['dribbbleProfileLink']:null;
 				var obj = {
 					name: name,
 					image: image,
@@ -429,6 +437,18 @@
 				   return false;
 				}
 			});
+		}
+
+		function clearFilters(){
+		   designersList.filter();
+		   $("#empty-container").hide();
+		   $("#profile-list").show();
+		   $('.category-item').removeClass('category-item-active');
+		}
+
+		function toggleMobFilters(){
+			$(".categories-bar").toggle();
+			document.body.style.overflow = "hidden";
 		}
 
 	</script>
