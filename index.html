@@ -329,6 +329,7 @@
 		$("#profile-card-loader").show();
 		$.getJSON("https://api.sheety.co/407b488f-30ff-4d32-b005-4678da61776f", function(data) {
 			// console.log(data);
+			data.sort(function() { return 0.5 - Math.random() });
 			$.each(data, function( key, value ) {
 				if(value['approvalStatus']=='Approved'){
 					var name = value['what\'SYourName?'];
