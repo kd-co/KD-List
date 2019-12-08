@@ -337,7 +337,7 @@
 					var bio = value['giveUsAShortBioOfYourself?'];
 					var categories = value['whatCategoriesDoYouThinkYou\'LlFallInto?'].split(',');
 					categories.forEach(function(item, i) {
-					    this[i] = item.replace(/^\s/, '');
+					    this[i] = item.replace(/^\s/, ' ');
 					}, categories);
 					var portfolio = value['linkToPersonalWebsite']!==null?value['linkToPersonalWebsite']:null;
 					var facebook = value['facebookProfileLink']!==null?value['facebookProfileLink']:null;
