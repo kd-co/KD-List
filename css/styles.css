@@ -336,6 +336,16 @@ a{
 	}
 }
 @media(max-width: 800px){
+	.empty-state img{
+		max-width: 100%;
+	}
+	.empty-state h2{
+		font-size: 18px;
+	}
+	.empty-state p{
+		font-size: 15px;
+		line-height: 1.5;
+	}
 	.web-only{
 		display: none !important;
 	}

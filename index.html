@@ -6,6 +6,7 @@
 	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/animate.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
+	<link rel="icon" href="favicon.ico" sizes="16x16">
 	<meta name="description" content="Kerala Designers Collaborative (KDCo) is a collective of Designers, Illustrators, Graphic Artists and other creative professionals from Kerala to facilitate an even platform for discussions, debates and creative collaborations concerning the design discourse in Kerala.">
   	<meta name="keywords" content="Malayalam, Design, Typography, Calligraphy, Letters">
   	<meta name="author" content="Kerala Designers Collaborative">
@@ -170,7 +171,7 @@
 				<div class="nav-link-container mob-only">
 					<a class="nav-link-item" href="https://kdco.info/" target="_blank">About</a>
 					<a class="nav-link-item" href="https://bit.ly/KDCoJobBoard" target="_blank">Jobs</a>
-					<a class="nav-link-item">Nominate</a>
+					<a class="nav-link-item" href="https://forms.gle/V7LKEn7iHZb4CvNt7" target="_blank">Nominate</a>
 				</div>
 			</div>
 
@@ -317,7 +318,7 @@
 
 		$("#profile-card-loader").show();
 		$.getJSON("https://api.sheety.co/407b488f-30ff-4d32-b005-4678da61776f", function(data) {
-			console.log(data);
+			// console.log(data);
 			$.each(data, function( key, value ) {
 				if(value['approvalStatus']=='Approved'){
 					var name = value['what\'SYourName?'];
@@ -350,11 +351,11 @@
 						dribbble: dribbble
 					}
 					values.push(obj);
-					console.log(obj);
+					// console.log(obj);
 				}
 			});
 			designersList = new List('designers', options, values);	
-			console.log(designersList);
+			// console.log(designersList);
 			$("#profile-card-loader").hide();
 		});
 
@@ -433,7 +434,7 @@
 
 		var selectedFilters = [];
 
-		console.log(categoriesList);
+		// console.log(categoriesList);
 
 		function filterTemp(elem){
 
@@ -457,29 +458,32 @@
 				
 				intersection = item.values().categories.filter(element => selectedFilters.includes(element));
 
-				console.log("Inside filters");
-				console.log(intersection, intersection.length);
+				// console.log("Inside filters");
+				// console.log(intersection, intersection.length);
 
 				if(intersection.length>0){
 					count++;
 				}
 
-				console.log(count);
+				// console.log(count);
 
 				if(intersection.length==selectedFilters.length){
 					$(".filter-indicator").show();
 					$("#profile-list").show();
 					return true;
 				} else {
+					$(".filter-indicator").hide();
 					return false;
 				}
 			});
 
 			if(selectedFilters.length>0 && count==0){
-				$("#profile-list").hide();	
+				$("#profile-list").hide();
+				$(".filter-indicator").show();	
 		   		$("#empty-container").show();
 			} else {
 		   		$("#empty-container").hide();
+				$(".filter-indicator").hide();	
 				$("#profile-list").show();	
 			}
 		}
