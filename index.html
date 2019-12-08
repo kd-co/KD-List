@@ -192,7 +192,7 @@
 			<div id="categories" class="categories-bar">
 				<p class="filters-header">Filters</p>
 				<a onclick="toggleMobFilters()" class="filters-close-icon"><img src="img/close-icon.png"></a>
-				<a class="filter-clear" onclick="clearFilters();toggleMobFilters();">Clear all</a>
+				<a class="filter-clear mob-only" onclick="clearFilters();toggleMobFilters();">Clear</a>
 
 				<ul style="display: block; padding: 0px;" class="list">
 					
@@ -455,6 +455,7 @@
 		// console.log(categoriesList);
 
 		function filterTemp(elem){
+		   	designersList.filter();
 
 			var selectedItem = $(elem).find('.name').text();
 
@@ -486,23 +487,25 @@
 				// console.log(count);
 
 				if(intersection.length==selectedFilters.length){
-					$(".filter-indicator").show();
 					$("#profile-list").show();
 					return true;
 				} else {
-					$(".filter-indicator").hide();
 					return false;
 				}
 			});
 
 			if(selectedFilters.length>0 && count==0){
 				$("#profile-list").hide();
-				$(".filter-indicator").show();	
 		   		$("#empty-container").show();
 			} else {
 		   		$("#empty-container").hide();
-				$(".filter-indicator").hide();	
 				$("#profile-list").show();	
+			}
+
+			if(selectedFilters.length>0){
+				$(".filter-indicator").show();	
+			} else {
+				$(".filter-indicator").hide();	
 			}
 		}
 
