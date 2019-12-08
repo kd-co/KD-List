@@ -269,6 +269,7 @@
 		  	'location', 
 		  	'bio', 
 		  	'categories', 
+		  	'categories_hidden', 
 		  	{ name: 'portfolio',
 		  	  attr: 'href',
 		  	},
@@ -295,6 +296,7 @@
 				<p class='profile-card-location location'></p>
 				<h3 class='profile-card-name name'></h3>
 				<h6 class='profile-card-category categories'></h6>
+				<h6 class='profile-card-category categories_hidden'></h6>
 				<p class='profile-card-bio bio'></p>
 				<div class='profile-card-sm-container'>
 					<a class='profile-card-sm-item facebook'>
@@ -336,6 +338,7 @@
 					var location = value['whereAreYouBasedOutOf?'];
 					var bio = value['giveUsAShortBioOfYourself?'];
 					var categories = value['whatCategoriesDoYouThinkYou\'LlFallInto?'].split(',');
+					var categories_hidden = value['whatCategoriesDoYouThinkYou\'LlFallInto?'].split(', ');
 					categories.forEach(function(item, i) {
 					    this[i] = item.replace(/^\s/, ' ');
 					}, categories);
@@ -351,6 +354,7 @@
 						location: location,
 						bio: bio,
 						categories: categories,
+						categories_hidden: categories_hidden,
 						portfolio: portfolio,
 						facebook: facebook,
 						twitter: twitter,
@@ -445,7 +449,7 @@
 			{ 
 				name: '3D Artist',
 				icon: 'em em-package'
-			}
+			},
 		]
 
 		var categoriesList = new List('categories', category_options, category_values);
@@ -458,6 +462,8 @@
 		   	designersList.filter();
 
 			var selectedItem = $(elem).find('.name').text();
+
+			console.log(selectedItem);
 
 			var count=0;
 
@@ -474,16 +480,16 @@
 			}
 
 			designersList.filter(function(item) {
-				
-				intersection = item.values().categories.filter(element => selectedFilters.includes(element));
 
-				// console.log("Inside filters");
-				// console.log(intersection, intersection.length);
+				console.log(item.values().categories_hidden, 999);
+				
+				intersection = item.values().categories_hidden.filter(element => selectedFilters.includes(element));
+
+				console.log(intersection, intersection.length);
 
 				if(intersection.length>0){
 					count++;
 				}
-
 
 				if(intersection.length==selectedFilters.length){
 					$("#profile-list").show();
@@ -494,7 +500,7 @@
 
 			});
 
-			// console.log(count, selectedFilters);
+			console.log(count, selectedFilters);
 
 			if(selectedFilters.length>0){
 				$(".filter-indicator").show();	

@@ -323,6 +323,9 @@ a:hover, a:focus{
 	background: #fff;
 	min-height: 100vh;
 }
+.categories_hidden{
+	display: none !important;
+}
 @media(min-width: 800px){
 	.nav{
 		position: fixed;
