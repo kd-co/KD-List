@@ -11,6 +11,12 @@
   	<meta name="keywords" content="Malayalam, Design, Typography, Calligraphy, Letters">
   	<meta name="author" content="Kerala Designers Collaborative">
   	<meta name=viewport content="width=device-width, initial-scale=1">
+  	<meta property="og:title" content="KDCo - The KD List">
+	<meta property="og:site_name" content="">
+	<meta property="og:url" content="https://kdco.info/kd-list/">
+	<meta property="og:description" content="Kerala Designers Collaborative (KDCo) is a collective of Designers, Illustrators, Graphic Artists and other creative professionals from Kerala.">
+	<meta property="og:type" content="article">
+	<meta property="og:image" content="https://kdco.info/kd-list/img/og-image.png">
 </head>
 <body>
 	<div class="nav-section animated fadeIn">
@@ -318,7 +324,7 @@
 
 		$("#profile-card-loader").show();
 		$.getJSON("https://api.sheety.co/407b488f-30ff-4d32-b005-4678da61776f", function(data) {
-			// console.log(data);
+			console.log(data);
 			$.each(data, function( key, value ) {
 				if(value['approvalStatus']=='Approved'){
 					var name = value['what\'SYourName?'];
