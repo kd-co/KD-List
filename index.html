@@ -245,7 +245,7 @@
 
 	<a class="nominate-fab" href="https://forms.gle/V7LKEn7iHZb4CvNt7" target="_blank">Nominate a KD</a>
 
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" crossorigin="anonymous"></script>
 	<script src="js/list.min.js"></script>
 
 	<script type="text/javascript">
@@ -331,12 +331,12 @@
 					categories.forEach(function(item, i) {
 					    this[i] = item.replace(/^\s/, '');
 					}, categories);
-					var portfolio = value['linkToPersonalWebsite']?value['linkToPersonalWebsite']:null;
-					var facebook = value['facebookProfileLink']?value['facebookProfileLink']:null;
-					var twitter = value['twitterProfileLink']?value['twitterProfileLink']:null;
-					var linkedin = value['gsx$linkedin']?value['gsx$linkedin']:null;
-					var behance = value['behanceProfileLink']?value['behanceProfileLink']:null;
-					var dribbble = value['dribbbleProfileLink']?value['dribbbleProfileLink']:null;
+					var portfolio = value['linkToPersonalWebsite']!==null?value['linkToPersonalWebsite']:null;
+					var facebook = value['facebookProfileLink']!==null?value['facebookProfileLink']:null;
+					var twitter = value['twitterProfileLink']!==null?value['twitterProfileLink']:null;
+					var linkedin = value['gsx$linkedin']!==null?value['gsx$linkedin']:null;
+					var behance = value['behanceProfileLink']!==null?value['behanceProfileLink']:null;
+					var dribbble = value['dribbbleProfileLink']!==null?value['dribbbleProfileLink']:null;
 					var obj = {
 						name: name,
 						image: image,
@@ -357,6 +357,16 @@
 			designersList = new List('designers', options, values);	
 			// console.log(designersList);
 			$("#profile-card-loader").hide();
+
+			setTimeout(function(){
+				$(".profile-card-sm-item").each(function() {
+				    if(($(this).attr("href")=='null') || ($(this).attr("href")=='undefined')){
+				    	$(this).remove();
+				    }
+				});
+
+			}, 0);
+
 		});
 
 		var category_options = {

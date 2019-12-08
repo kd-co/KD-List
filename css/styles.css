@@ -173,7 +173,7 @@ a{
 	font-weight: 700;
 	color: #222;
 	margin: 10px 0px 7px 0px;
-	font-size: 20px;
+	font-size: 21px;
 	position: relative;
 }
 .profile-card-location{
@@ -192,7 +192,7 @@ a{
 	font-weight: 400;
     color: #666;
     margin: 0px 0px 10px 0px;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.4;
     position: relative;
     height: 5.0em;
@@ -365,7 +365,7 @@ a{
 		padding: 15px 15px 0px 15px;
 	}
 	.nav-link-item{
-		font-size: 12px;
+		font-size: 13px;
 	}
 	.nominate-fab{
 		/*left: 0px;
