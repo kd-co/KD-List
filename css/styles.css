@@ -1,9 +1,11 @@
 /*@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,700');*/
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,900');
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:300,400,700,900&display=swap');
 
 html,body{
-	/*font-family: 'Noto Sans', sans-serif;*/
-	font-family: 'Montserrat', sans-serif;
+	/*font-family: 'Work Sans', sans-serif;*/
+	/*font-family: 'Montserrat', sans-serif;*/
+	font-family: -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
 	margin: 0px;
 	padding: 0px;
 	color: #666;
@@ -37,13 +39,14 @@ a{
 	color: #000;
 }
 .nav-link-item:after{
-	display: inline-block;
-	content: '\0000B7';
-	margin: 0px 10px;
-	font-size: 28px;
-	position: relative;
-	top: 3px;
-	line-height: 20px;
+    display: inline-block;
+    content: '\0000B7';
+    margin: 0px 10px;
+    font-size: 28px;
+    position: relative;
+    top: 5px;
+    line-height: 20px;
+    color: #999;
 }
 .nav-link-item:last-child:after{
 	display: none;
@@ -78,7 +81,7 @@ a{
 .category-item{
 	display: block;
 	font-size: 0.9em;
-	padding: 12px 10px 10px 30px;
+	padding: 12px 10px 10px 25px;
 	color: #666;
 	cursor: pointer;
 	/*border-radius: 3px;*/
@@ -146,7 +149,7 @@ a{
 	border-radius: 2px;
 	margin-bottom: 20px;
 	text-align: center;
-	height: 385px;
+	height: 360px;
 }
 .profile-card:last-child{
 	/*border-bottom: none;*/
@@ -186,13 +189,14 @@ a{
     display: inline-block;
 }
 .profile-card-bio{
-    font-weight: 400;
+	font-weight: 400;
     color: #666;
     margin: 0px 0px 10px 0px;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 1.4;
     position: relative;
-    height: 6.2em;
+    height: 5.0em;
+    overflow: hidden;
 }
 .profile-card-category{
 	font-weight: 400;
