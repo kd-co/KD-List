@@ -18,6 +18,36 @@ a{
     overflow-y: auto;
     overflow-x: hidden;
 }
+.main-header{
+	padding-bottom: 5px;
+	/*border-bottom: 1px solid #eee;*/
+}
+.nav-link-container{
+	margin: 0px 0px 20px 0px;
+}
+.nav-link-item{
+	text-transform: uppercase;
+	font-size: 13px;
+	font-weight: 400;
+	display: inline-block;
+	color: #444;
+	transition: all 0.1s ease-in;
+}
+.nav-link-item:hover{
+	color: #000;
+}
+.nav-link-item:after{
+	display: inline-block;
+	content: '\0000B7';
+	margin: 0px 10px;
+	font-size: 28px;
+	position: relative;
+	top: 3px;
+	line-height: 20px;
+}
+.nav-link-item:last-child:after{
+	display: none;
+}
 .hide{
 	display: none !important;
 }
@@ -35,6 +65,12 @@ a{
 	line-height: 1.1;
 	margin-top: 10px;
 }
+.filters-header{
+	font-size: 14px;
+	color: #999;
+	margin: 20px 0px -10px 0px;
+	font-weight: 300;
+}
 .category-list{
 	margin-top: 15px;
 	width: 250px;
@@ -42,7 +78,7 @@ a{
 .category-item{
 	display: block;
 	font-size: 0.9em;
-	padding: 12px 15px 12px 30px;
+	padding: 12px 10px 10px 30px;
 	color: #666;
 	cursor: pointer;
 	/*border-radius: 3px;*/
@@ -196,7 +232,7 @@ a{
 	display: none;	
 }
 .category-list-apply-mob{
-	display: none;
+	display: none !important;
 }
 
 @keyframes placeHolderShimmer{
@@ -272,29 +308,63 @@ a{
 .nominate-fab:hover{
 	box-shadow: 0px 5px 30px rgba(0,0,0,0.4);
 }
+#profile-list{
+	min-height: 100vh;
+	background: #fff;
+}
+#profile-card-loader{
+	background: #fff;
+	min-height: 100vh;
+}
 @media(min-width: 800px){
 	.nav{
 		position: fixed;
 		left: 0px;
 		top: 0px;
 		width: 300px;
+		height: 100vh;
+		overflow: auto;
 	}
 	.profile-card-section{
-		padding-left: 300px !important;
+		padding-left: 315px !important;
+	}
+	.mob-only, .mob-only-inline{
+		display: none !important;
+	}
+	.filters-close-icon{
+		display: none;
 	}
 }
 @media(max-width: 800px){
+	.web-only{
+		display: none !important;
+	}
+	.mob-only-inline{
+		display: inline-block;
+	}
+	.nav-link-container{
+		float: right;
+		display: inline-block;
+	    margin: 16px 0px 0px 0px;
+	}
+	.nav{
+		padding: 15px 15px 0px 15px;
+	}
+	.nav-link-item{
+		font-size: 12px;
+	}
 	.nominate-fab{
-	    left: 0px;
+		/*left: 0px;
 	    right: 0px;
 	    margin: 0 auto;
 	    width: 180px;
-	    text-align: center;
+	    text-align: center;*/
+	    display: none !important;
 	}
 	.categories-bar{
 		display: none;
 		position: fixed;
-		top: 90px;
+		top: 0px;
 		left: 0px;
 		right: 0px;
 		bottom: 0px;
@@ -306,7 +376,9 @@ a{
 		height: calc(100vh - 120px);
 		overflow: auto;
 	}
-
+	.nav-link-item:after{
+		margin: 0px 7px;
+	}
 	.logo-container, #kdco-logo {
 	    width: 100px;
 	    height: 67px;
@@ -323,22 +395,24 @@ a{
 	}
 	.category-list-apply-mob{
 		position: fixed;
-	    bottom: 20px;
-	    right: 20px;
+	    bottom: 15px;
+	    right: 15px;
 	    width: 56px;
 	    height: 56px;
 	    text-align: center;
-	    display: block;
 	    background: #000;
 	    z-index: 999;
 	    color: #fff;
         border-radius: 1000px;
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 	}
 	.category-list-apply-mob img{
         max-width: 24px;
 	    filter: invert(100%);
 	    position: relative;
-	    top: 18px;
 	}
 	.category-item-checkmark {
     	right: 0px;
@@ -382,16 +456,42 @@ a{
 	.profile-card-category{
 		font-size: 14px;
 	}
-	.mob-filters{
-		display: inline-block;
-		float: right;
-		padding: 15px 0px;
-		position: relative;
+	.mob-filters{		
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: fixed;
+		border-radius: 1000px;
+    	text-align: center;
+    	height: 56px;
+    	width: 56px;
+    	font-size: 15px;
+    	color: #fff;
+    	font-weight: 500;
+    	background: #fff;
+    	position: fixed;
+    	right: 15px;
+    	bottom: 15px;
+    	box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+    	transition: all 0.1s ease-in-out;
+	}
+	.filters-close-icon{
+	    opacity: 0.4;
+	    right: 20px;
+	    position: absolute;
+	    top: 20px;
+	}
+	.filters-close-icon img{
+	    width: 18px;
+	}
+	.filters-header{
+		margin-bottom: 0px;
 	}
 	.filter-indicator{
-	    position: absolute;
-	    top: 6px;
-	    right: -10px;
+		position: absolute;
+	    top: 12px;
+	    right: 10px;
 	    height: 20px;
 	    width: 20px;
 	    border-radius: 50%;
