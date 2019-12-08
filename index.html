@@ -326,11 +326,11 @@
 
 		$("#profile-card-loader").show();
 		$.getJSON("https://api.sheety.co/407b488f-30ff-4d32-b005-4678da61776f", function(data) {
-			// console.log(data);
+			console.log(data);
 			$.each(data, function( key, value ) {
 				if(value['approvalStatus']=='Approved'){
 					var name = value['what\'SYourName?'];
-					var image = value['uploadAPhotoOfYourself']?value['uploadAPhotoOfYourself']:null;
+					var image = value['uploadAPhotoOfTheKD']?value['uploadAPhotoOfTheKD']:null;
 					image = image.split('?id=')[1];
 					image = 'https://drive.google.com/uc?export=view&id=' + image;
 					var location = value['whereAreYouBasedOutOf?'];
