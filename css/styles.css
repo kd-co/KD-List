@@ -15,6 +15,9 @@ a{
 	cursor: pointer;
 	text-decoration: none;
 }
+a:hover, a:focus{
+	outline: none;
+}
 .nav{
 	padding: 15px 20px;
     overflow-y: auto;
@@ -80,7 +83,7 @@ a{
 }
 .category-item{
 	display: block;
-	font-size: 0.9em;
+	font-size: 15px;
 	padding: 12px 10px 10px 25px;
 	color: #666;
 	cursor: pointer;
@@ -365,7 +368,7 @@ a{
 		padding: 15px 15px 0px 15px;
 	}
 	.nav-link-item{
-		font-size: 13px;
+		font-size: 14px;
 	}
 	.nominate-fab{
 		/*left: 0px;
@@ -434,6 +437,7 @@ a{
 	}
 	.category-item{
 		padding: 12px 15px 12px 30px;
+		color: #333;
 	}
 	.profile-card-section {
 	    display: block;    
@@ -458,17 +462,17 @@ a{
 	    font-size: 14px;
 	}
 	.profile-card-name{
-		font-size: 18px;
+		font-size: 19px;
 	}
 	.profile-card-location{
 		font-size: 13px;
 	}
 	.profile-card-bio{
-		font-size: 14px;
+		font-size: 15px;
 		height: auto;
 	}
 	.profile-card-category{
-		font-size: 14px;
+		font-size: 15px;
 	}
 	.mob-filters{		
 		display: flex;
@@ -487,20 +491,30 @@ a{
     	position: fixed;
     	right: 15px;
     	bottom: 15px;
-    	box-shadow: 0px 5px 10px rgba(0,0,0,0.2);
+    	box-shadow: 0px 5px 12px rgba(0,0,0,0.4);
     	transition: all 0.1s ease-in-out;
 	}
 	.filters-close-icon{
 	    opacity: 0.4;
 	    right: 20px;
 	    position: absolute;
-	    top: 20px;
+	    top: 23px;
 	}
 	.filters-close-icon img{
-	    width: 18px;
+	    width: 16px;
+	}
+	.filter-clear{
+		font-size: 15px;
+		position: absolute;top: 22px;
+		right: 70px;
 	}
 	.filters-header{
-		margin-bottom: 0px;
+	    font-size: 18px;
+	    color: #333;
+	    margin-bottom: 0px;
+	    border-bottom: 1px solid #ddd;
+	    padding: 20px;
+	    margin: 0px -20px;
 	}
 	.filter-indicator{
 		position: absolute;
