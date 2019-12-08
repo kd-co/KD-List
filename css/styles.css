@@ -510,7 +510,7 @@ a:hover, a:focus{
 	}
 	.filters-header{
 	    font-size: 18px;
-	    color: #333;
+	    color: #222;
 	    margin-bottom: 0px;
 	    border-bottom: 1px solid #ddd;
 	    padding: 20px;
@@ -518,7 +518,7 @@ a:hover, a:focus{
 	}
 	.filter-indicator{
 		position: absolute;
-	    top: 12px;
+	    top: 10px;
 	    right: 10px;
 	    height: 20px;
 	    width: 20px;

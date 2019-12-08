@@ -326,7 +326,7 @@
 
 		$("#profile-card-loader").show();
 		$.getJSON("https://api.sheety.co/407b488f-30ff-4d32-b005-4678da61776f", function(data) {
-			console.log(data);
+			// console.log(data);
 			$.each(data, function( key, value ) {
 				if(value['approvalStatus']=='Approved'){
 					var name = value['what\'SYourName?'];
@@ -484,7 +484,6 @@
 					count++;
 				}
 
-				// console.log(count);
 
 				if(intersection.length==selectedFilters.length){
 					$("#profile-list").show();
@@ -492,20 +491,25 @@
 				} else {
 					return false;
 				}
+
 			});
 
-			if(selectedFilters.length>0 && count==0){
-				$("#profile-list").hide();
-		   		$("#empty-container").show();
-			} else {
-		   		$("#empty-container").hide();
-				$("#profile-list").show();	
-			}
+			// console.log(count, selectedFilters);
 
 			if(selectedFilters.length>0){
 				$(".filter-indicator").show();	
 			} else {
 				$(".filter-indicator").hide();	
+			}
+
+			if ($('#profile-list').is(':empty')){
+			  	// console.log("Empty");
+				$("#profile-list").hide();
+		   		$("#empty-container").show();
+			} else {
+				// console.log("Not empty");
+		   		$("#empty-container").hide();
+				$("#profile-list").show();
 			}
 		}
 
