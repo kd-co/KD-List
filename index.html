@@ -5,6 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="css/grid12.css">
 	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/animate.css">
+	<link rel="stylesheet" type="text/css" href="css/balloon.min.css">
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 	<link rel="icon" href="favicon.ico" sizes="16x16">
 	<meta name="description" content="Kerala Designers Collaborative (KDCo) is a collective of Designers, Illustrators, Graphic Artists and other creative professionals from Kerala to facilitate an even platform for discussions, debates and creative collaborations concerning the design discourse in Kerala.">
@@ -273,19 +274,10 @@
 		  	{ name: 'portfolio',
 		  	  attr: 'href',
 		  	},
-		  	{ name: 'facebook',
+		  	{ name: 'personal_website',
 		  	  attr: 'href',
 		  	},
-		  	{ name: 'twitter',
-		  	  attr: 'href',
-		  	},
-		  	{ name: 'linkedin',
-		  	  attr: 'href',
-		  	},
-		  	{ name: 'dribbble',
-		  	  attr: 'href',
-		  	},
-		  	{ name: 'behance',
+		  	{ name: 'social',
 		  	  attr: 'href',
 		  	},
 	  		],
@@ -293,29 +285,20 @@
 		  item: `<div style="display:block;" class="col-md-4 profile-card-li">
 		  	<div class='profile-card animated fadeIn'>
 				<img class='profile-card-dp image' src=''>
-				<p class='profile-card-location location'></p>
 				<h3 class='profile-card-name name'></h3>
 				<h6 class='profile-card-category categories'></h6>
 				<h6 class='profile-card-category categories_hidden'></h6>
+				<p class='profile-card-location-text location'></p>
 				<p class='profile-card-bio bio'></p>
 				<div class='profile-card-sm-container'>
-					<a class='profile-card-sm-item facebook'>
-						<img src='img/facebook-icon.png'>
-					</a>
-					<a class='profile-card-sm-item twitter'>
-						<img src='img/twitter-icon.png'>
-					</a>
-					<a class='profile-card-sm-item linkedin'>
-						<img src='img/linkedin-icon.png'>
-					</a>
-					<a class='profile-card-sm-item behance'>
-						<img src='img/behance-icon.png'>
-					</a>
-					<a class='profile-card-sm-item dribbble'>
-						<img src='img/dribbble-icon.png'>
-					</a>
-					<a class='profile-card-sm-item portfolio'>
+					<a aria-label='Personal website' data-balloon-pos='up' class='profile-card-sm-item personal_website'>
 						<img src='img/portfolio-icon.png'>
+					</a>
+					<a aria-label='Portfolio' data-balloon-pos='up' class='profile-card-sm-item portfolio'>
+						<img src='img/briefcase-icon.png'>
+					</a>
+					<a aria-label='Social media' data-balloon-pos='up' class='profile-card-sm-item social'>
+						<img src='img/globe-icon.png'>
 					</a>
 				</div>
 			</div>
@@ -343,12 +326,9 @@
 					categories.forEach(function(item, i) {
 					    this[i] = item.replace(/^\s/, ' ');
 					}, categories);
-					var portfolio = value['linkToPersonalWebsite']!==null?value['linkToPersonalWebsite']:null;
-					var facebook = value['facebookProfileLink']!==null?value['facebookProfileLink']:null;
-					var twitter = value['twitterProfileLink']!==null?value['twitterProfileLink']:null;
-					var linkedin = value['linkedinProfileLink']!==null?value['linkedinProfileLink']:null;
-					var behance = value['behanceProfileLink']!==null?value['behanceProfileLink']:null;
-					var dribbble = value['dribbbleProfileLink']!==null?value['dribbbleProfileLink']:null;
+					var personal_website = value['linkToPersonalWebsite']!==null?value['linkToPersonalWebsite']:null;
+					var social = value['linkToYourSocialMediaProfile']!==null?value['linkToYourSocialMediaProfile']:null;
+					var portfolio = value['linkToPortfolio']!==null?value['linkToPortfolio']:null;
 					var obj = {
 						name: name,
 						image: image,
@@ -356,12 +336,9 @@
 						bio: bio,
 						categories: categories,
 						categories_hidden: categories_hidden,
+						personal_website: personal_website,
 						portfolio: portfolio,
-						facebook: facebook,
-						twitter: twitter,
-						linkedin: linkedin,
-						behance: behance,
-						dribbble: dribbble
+						social: social
 					}
 					values.push(obj);
 					// console.log(obj);
